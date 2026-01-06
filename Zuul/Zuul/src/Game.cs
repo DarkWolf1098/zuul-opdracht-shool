@@ -22,6 +22,8 @@ class Game
 		Room pub = new Room("in the campus pub");
 		Room lab = new Room("in a computing lab");
 		Room office = new Room("in the computing admin office");
+		Room library = new Room("in the campus library");
+		Room gym = new Room("in the campus gym");
 
 		// Initialise room exits
 		outside.AddExit("east", theatre);
@@ -36,13 +38,12 @@ class Game
 		lab.AddExit("east", office);
 
 		office.AddExit("west", lab);
+		office.AddExit("up", library);
+		office.AddExit("down", gym);
 
-		// Create your Items here
-		// ...
-		// And add them to the Rooms
-		// ...
+		library.AddExit("down", office);
 
-		// Start game outside
+		gym.AddExit("up", office);
 		currentRoom = outside;
 	}
 
@@ -60,8 +61,6 @@ class Game
 			finished = ProcessCommand(command);
 		}
 		Console.WriteLine("Thank you for playing.");
-		Console.WriteLine("Press [Enter] to continue.");
-		Console.ReadLine();
 	}
 
 	// Print out the opening message for the player.
@@ -98,6 +97,9 @@ class Game
 				break;
 			case "quit":
 				wantToQuit = true;
+				break;
+			case "look":
+				Console.WriteLine(currentRoom.GetLongDescription());
 				break;
 		}
 
@@ -140,6 +142,7 @@ class Game
 			return;
 		}
 
+		// Move to the next room and show its description
 		currentRoom = nextRoom;
 		Console.WriteLine(currentRoom.GetLongDescription());
 	}

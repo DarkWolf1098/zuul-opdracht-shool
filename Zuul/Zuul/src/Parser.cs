@@ -18,11 +18,13 @@ class Parser
 
 		string word1 = null;
 		string word2 = null;
+		string word3 = null;
 
 		// string.Split() returns an array
 		string[] words = Console.ReadLine().Split(' ');
 		if (words.Length > 0) { word1 = words[0]; }
 		if (words.Length > 1) { word2 = words[1]; }
+		if (words.Length > 2) { word3 = words[2];}
 
 		// Now check whether this word is known. If so, create a command with it.
 		if (commandLibrary.IsValidCommandWord(word1)) {
